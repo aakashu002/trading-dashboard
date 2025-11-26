@@ -1,0 +1,162 @@
+.container {
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  padding: 24px;
+  max-width: 100%;
+  margin: 0 auto;
+  background: #0f172a;
+  min-height: 100vh;
+  color: #e2e8f0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #334155;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.statusWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.statusDotPulse {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.statusText {
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.errorText {
+  color: #ef4444;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 48px;
+  color: #64748b;
+  background: #1e293b;
+  border-radius: 12px;
+}
+
+.priceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.priceCard {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #334155;
+  transition: all 0.2s ease;
+}
+
+.priceCard:hover {
+  border-color: #475569;
+  transform: translateY(-2px);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.symbol {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.changeIndicator {
+  font-size: 20px;
+}
+
+.price {
+  font-size: 28px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.footer {
+  margin-top: 24px;
+  padding: 16px;
+  background: #1e293b;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #64748b;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Status colors */
+.statusConnected {
+  color: #10b981;
+}
+
+.statusConnecting,
+.statusReconnecting {
+  color: #f59e0b;
+}
+
+.statusDisconnected {
+  color: #ef4444;
+}
+
+.bgConnected {
+  background: #10b981;
+}
+
+.bgConnecting,
+.bgReconnecting {
+  background: #f59e0b;
+}
+
+.bgDisconnected {
+  background: #ef4444;
+}
+
+/* Price change colors */
+.priceUp {
+  color: #10b981;
+}
+
+.priceDown {
+  color: #ef4444;
+}
+
+.priceNeutral {
+  color: #6b7280;
+}
