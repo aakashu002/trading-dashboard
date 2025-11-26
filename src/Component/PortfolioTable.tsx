@@ -1,12 +1,8 @@
 // src/components/PortfolioTable.tsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useWebSocketPrices } from "../Hooks/useWebSocketPrices";
-
-type PortfolioItem = {
-  symbol: string;
-  quantity: number;
-  avgCost: number;
-};
+import { usePortfolioStore } from "../store/Store";
+import type { PortfolioItem } from "../store/Store";
 
 type CombinedRow = PortfolioItem & {
   currentPrice?: number;
@@ -15,41 +11,14 @@ type CombinedRow = PortfolioItem & {
   dailyPnlPercent?: number;
 };
 
-const PORTFOLIO_URL = "/portfolio.json"; // served from public/
-
 export default function PortfolioTable() {
   const { prices, status } = useWebSocketPrices();
-  const [portfolio, setPortfolio] = useState<PortfolioItem[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const { portfolio, error, fetchPortfolio } = usePortfolioStore();
 
-  // fetch portfolio with one retry after 3s on failure
+  // Fetch portfolio on mount
   useEffect(() => {
-    let mounted = true;
-    const fetchOnce = async () => {
-      try {
-        const res = await fetch(PORTFOLIO_URL);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = (await res.json()) as PortfolioItem[];
-        if (mounted) setPortfolio(data);
-      } catch (err) {
-        // retry once after 3s
-        setTimeout(async () => {
-          try {
-            const r2 = await fetch(PORTFOLIO_URL);
-            if (!r2.ok) throw new Error(`HTTP ${r2.status}`);
-            const d2 = (await r2.json()) as PortfolioItem[];
-            if (mounted) setPortfolio(d2);
-          } catch (err2: any) {
-            if (mounted) setError(String(err2?.message ?? err2));
-          }
-        }, 3000);
-      }
-    };
-    fetchOnce();
-    return () => {
-      mounted = false;
-    };
-  }, []);
+    fetchPortfolio();
+  }, [fetchPortfolio]);
 
   // prevPrices ref to detect up/down flash
   const prevPricesRef = useRef<Record<string, number>>({});
@@ -124,7 +93,6 @@ export default function PortfolioTable() {
     <div className="py-6 font-sans text-slate-200">
       <div className="flex items-center justify-between mb-4">
         <h2 className="m-0 text-xl font-semibold text-slate-50">Portfolio</h2>
-        <div className="text-sm text-slate-500">WS: {status}</div>
       </div>
 
       <div className="overflow-auto rounded-xl bg-slate-800 border border-slate-700">
