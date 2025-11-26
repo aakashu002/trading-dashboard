@@ -160,3 +160,90 @@
 .priceNeutral {
   color: #6b7280;
 }
+
+/* Watchlist section */
+.watchlistSection {
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f8fafc;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sectionTitle span {
+  color: #f59e0b;
+}
+
+.watchlistEmpty {
+  padding: 24px;
+  text-align: center;
+  color: #64748b;
+  background: #1e293b;
+  border-radius: 12px;
+  border: 1px dashed #334155;
+  font-size: 14px;
+}
+
+/* Star button */
+.starButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px;
+  transition: transform 0.2s ease;
+  line-height: 1;
+}
+
+.starButton:hover {
+  transform: scale(1.2);
+}
+
+.starEmpty {
+  color: #475569;
+}
+
+.starFilled {
+  color: #f59e0b;
+}
+
+/* Clickable symbol */
+.symbolClickable {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f8fafc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.symbolClickable:hover {
+  color: #f59e0b;
+}
+
+/* All symbols section */
+.allSymbolsSection {
+  margin-bottom: 24px;
+}
+
+/* Watchlist card slight highlight */
+.watchlistCard {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #f59e0b;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.1);
+}
+
+.watchlistCard:hover {
+  border-color: #fbbf24;
+  transform: translateY(-2px);
+}
