@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import styles from "./LiveTracker.module.css";
-import PortfolioTable from "./PortfolioTable";
 import { useWebSocketPrices } from "../Hooks/useWebSocketPrices";
 import type { ConnStatus } from "../store/Store";
+
+const PortfolioTable = lazy(() => import("./PortfolioTable"));
 
 const FAVORITES_KEY = "trading-dashboard-favorites";
 
@@ -172,7 +173,15 @@ export default function LiveTracker() {
         )}
       </div>
 
-      <PortfolioTable />
+      <Suspense
+        fallback={
+          <div className="py-6 text-center text-slate-500">
+            Loading portfolio...
+          </div>
+        }
+      >
+        <PortfolioTable />
+      </Suspense>
       {/* Footer */}
       <div className={styles.footer}>
         <span>Live prices update every 200ms</span>
